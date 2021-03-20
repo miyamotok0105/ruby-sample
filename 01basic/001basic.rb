@@ -52,6 +52,7 @@ p "decimal:"+v_decimal.to_s
 
 p "========================"
 p "文字列から数値へ変換：to_i"
+p "文字列から数値floatへ変換：to_f"
 p "数値から文字列へ変換：to_s"
 p "+で連結"
 p "========================"
@@ -80,8 +81,6 @@ END_OF_STRING
 puts doc
 
 
-
-
 p "========================"
 p "型チェック"
 p "========================"
@@ -108,4 +107,111 @@ if ADMIN_EMAIL.instance_of?(String)
     p "ADMIN_EMAILはstringです"
 end
 
+p "========================"
+p "! 破壊的メソッド"
+p "? 真偽値を返すメソッド"
+p "========================"
 
+puts name.upcase!
+#!破壊的メソッドで元の値自体が変わる
+puts name
+p name.empty?
+
+
+p "========================"
+p "配列"
+p "========================"
+
+colors = ["red","blue","Yellow"]
+p colors
+p colors[0]
+p colors[-1] #末尾
+
+sales = [0,1,2,3,4,5]
+p sales[0..2] # 0 1 2 (0~2以上)
+p sales[0...2] #0 1のみ (0~2未満)
+
+p sales[1..3]
+p sales[1]
+p sales[2]
+
+p "置き換える"
+sales = [5,8,4]
+p sales
+
+p "要素を追加する"
+sales[1,0] = [10,11,12]
+p sales
+
+p "要素を削除する"
+sales[0,2] = [ ]
+p sales
+
+p "要素数、ソート、ソートリバース"
+p sales.size
+p sales.sort
+p sales.sort.reverse
+
+p "要素を末尾に追加"
+sales.push(1)
+sales.push(2)
+p sales
+
+p "========================"
+p "ハッシュ"
+p "========================"
+p "ハッシュはキーが文字列"
+sales = {"endo"=>200,"takahasihi"=>400}
+p sales
+p "シンボル名で書くと高速で動く"
+sales = {:taguchi =>200,:watanabe => 150}
+p sales
+p "シンボル名の省略形"
+sales = {taguchi: 200,watanabe: 150}
+p sales
+p "taguchi"
+p sales[:taguchi]
+
+sales[:taguchi] = 600
+
+p "要素数、キー、値"
+p sales.size
+p sales.keys
+p sales.values #中に値があるか確認する。
+p sales.has_key?(:taguchi)
+p sales.has_key?(:aaa)
+
+
+p "========================"
+p "配列へ変換：to_a"
+p "ハッシュへ変換：to_h"
+p "========================"
+
+p sales.to_a
+p sales.to_a.to_h
+
+p "========================"
+p "％記法"
+p "========================"
+
+p "%Q()はダブルクォートで囲んだのと同じ意味"
+p "%q()はシングルクォートで囲んだのと同じ意味"
+
+name="endo"
+puts "hello #{name}!"+" ."
+puts %Q(hello #{name}!)+%Q( .)
+
+p "%w()は配列で式展開されない"
+p "%W()は配列で式展開される"
+
+a = ["a","b","c"]
+p a
+a = %w(a b c)
+p a
+
+apple='red'
+banana='yellow'
+a = %W(#{apple} #{banana} PHP)
+p a
+
+p "name: %s" % "taguchi"
